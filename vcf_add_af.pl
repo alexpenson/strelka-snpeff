@@ -50,29 +50,29 @@ while (<>) {
     
     for (9..$#F) {
 	next if ($F[$_] eq "."); ### if genotype field is "." do nothing
-	my @GT = split ":", $F[$_];
-#	print "@GT\n";
-	my $DP = $GT[$iDP];
-#	print "$DP\n";
-	my $DP_ALT = 0;
-	if ($snvs_indels eq "snvs") { 
-	    $DP_ALT = (split ",", $GT[$iNT->{$ALT}])[0]; 
-	} elsif ($snvs_indels eq "indels") { 
-	    $DP_ALT = (split ",", $GT[$iTIR])[0]; 
-	}
-
 	my $AF = "."; ### if genotype field is ".:.:.:.:.:.:." then add a dot for AF
-	if ($DP_ALT ne "."){
-	if ($DP == 0){
-	    $AF = $DP_ALT / $DP;
+	my @GT = split ":", $F[$_];
+	my $DP = $GT[$iDP];
+	if ($DP ne "."){
+	    my $DP_ALT = 0;
+	    if ($snvs_indels eq "snvs") { 
+		$DP_ALT = (split ",", $GT[$iNT->{$ALT}])[0]; 
+	    } elsif ($snvs_indels eq "indels") { 
+		$DP_ALT = (split ",", $GT[$iTIR])[0]; 
+	    }
+	    
+	    if ($DP == 0){
+		$AF = 0;
+	    } else {
+		$AF = $DP_ALT / $DP;
+	    }
 	    $AF = sprintf("%.3f", $AF);
 	}
 	push @GT, $AF;
 #	print "$DP_ALT\n";
 	$F[$_] = join ":", @GT;
     }
-
+    
     print join("\t", @F), "\n";		      
     
 }
-

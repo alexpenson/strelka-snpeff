@@ -1,0 +1,1 @@
+/ifs/scratch/c2b2/rr_lab/shares/strelka-snpeff/dbSnp.sh < $1.AF.vcf | /ifs/scratch/c2b2/rr_lab/shares/strelka-snpeff/ann.sh | /ifs/scratch/c2b2/rr_lab/shares/strelka-snpeff/tsv.sh > $1.tsv

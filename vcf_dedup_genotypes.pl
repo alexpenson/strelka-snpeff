@@ -28,9 +28,10 @@ while (<>) {
 	### READ COLUMN NAMES
 	@field_names = split(/\t/); 
 	### numerically sort
-	@genotype_names = sort {$a <=> $b} (
-	    uniq (@field_names[9..$#field_names])
-	);
+#	@genotype_names = sort {$a <=> $b} (
+	### lexically sort
+	@genotype_names = uniq (@field_names[9..$#field_names]);
+	@genotype_names = sort (@genotype_names);
 # 	print "@genotype_names\n";
 # 	print Dumper($hash);
 	print join("\t", (@field_names[0..8],@genotype_names)), "\n";

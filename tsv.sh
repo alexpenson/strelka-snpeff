@@ -8,5 +8,5 @@ $SNPEFF_HOME/scripts/vcfEffOneHigh.pl | \
     "GEN[*].AF" "GEN[*].DP" \
     "EFF[*].EFFECT" "EFF[*].IMPACT" "EFF[*].FUNCLASS" "EFF[*].CODON" \
     "EFF[*].AA" "EFF[*].AA_LEN" "EFF[*].GENE" "EFF[*].BIOTYPE" \
-    "EFF[*].CODING" "EFF[*].TRID" "EFF[*].RANK"
+    "EFF[*].CODING" "EFF[*].TRID" "EFF[*].RANK" dbSNPBuildID COSMIC_NSAMP 
 
