@@ -1,0 +1,3 @@
+#!/bin/sed -f
+/^#CHROM/c\
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	b	t1	b	t2

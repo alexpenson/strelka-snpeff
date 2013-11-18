@@ -45,7 +45,8 @@ while (<>) {
     ### RESET HASH OF GENOTYPE INFO
     @$hash{@genotype_names} = (".") x scalar @genotype_names;
     for (9..$#field_names) {
-	next if ($input_fields[$_] eq ".");
+	next if ($input_fields[$_] eq "." );
+	next if ($input_fields[$_] eq ".:.:.:.:.:.:.:." );
 #	print $field_names[$_],"\t",$input_fields[$_],"\n";
 	if ($hash->{$field_names[$_]} ne $input_fields[$_]) {
 # 	    if ( $hash->{$field_names[$_]} ne "." ) {

@@ -26,13 +26,13 @@ java -Xmx4G -jar $SNPEFF_HOME/SnpSift.jar \
     /ifs/scratch/c2b2/rr_lab/shares/ref/COSMIC/CosmicVariants_v67_20131024.vcf \
     $output_prefix.eff.dbSnp.vcf \
     > $output_prefix.eff.dbSnp.cosmic.vcf
-java -Xmx4G -jar $SNPEFF_HOME/SnpSift.jar \
-    dbnsfp -v \
-    $SNPEFF_HOME/dbNSFP2.1.txt \
-    -f SIFT_pred,Polyphen2_HDIV_pred,Polyphen2_HVAR_pred,LRT_pred,MutationTaster_pred,MutationAssessor_pred,FATHMM_pred \
-    $output_prefix.eff.dbSnp.cosmic.vcf \
-    > $output_prefix.eff.dbSnp.cosmic.dbNSFP.vcf
-#sed -i 's/GERP++/GERP/gi' $output_prefix.eff.dbSnp.cosmic.dbNSFP.vcf ### remove plus signs in GERP++ which can screw up downstream tools
+# java -Xmx4G -jar $SNPEFF_HOME/SnpSift.jar \
+#     dbnsfp -v -a \
+#     $SNPEFF_HOME/dbNSFP2.1.txt \
+#     $output_prefix.eff.dbSnp.cosmic.vcf \
+#     > $output_prefix.eff.dbSnp.cosmic.dbNSFP.vcf
+# sed -i 's/GERP++/GERP/gi' $output_prefix.eff.dbSnp.cosmic.dbNSFP.vcf ### remove plus signs in GERP++ which can screw up downstream tools
+#    -f SIFT_pred,Polyphen2_HDIV_pred,Polyphen2_HVAR_pred,LRT_pred,MutationTaster_pred,MutationAssessor_pred,FATHMM_pred \
 
-rm $output_prefix.eff.vcf $output_prefix.eff.dbSnp.vcf $output_prefix.eff.dbSnp.cosmic.vcf
+rm $output_prefix.eff.vcf $output_prefix.eff.dbSnp.vcf #$output_prefix.eff.dbSnp.cosmic.vcf
 
