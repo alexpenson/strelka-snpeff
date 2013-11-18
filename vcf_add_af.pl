@@ -19,14 +19,14 @@ use List::Util qw(first);
 # my @genotype_names = ();
 # my $hash = {};
 while (<>) { 
-    print q(##FORMAT=<ID=AF,Number=1,Type=Float,Description="Allele fraction for tier1">),"\n" 
+    print q(##FORMAT=<ID=FREQ,Number=1,Type=Float,Description="Allele fraction for tier1">),"\n" 
 	if (/^##FORMAT=<ID=DP,/);
     if (/^#/) { print; next }
     chomp; my @F = split(/\t/);
     my $REF = $F[3];
     my $ALT = (split ",", $F[4])[0];
     my @FORMAT = split ":", $F[8];
-    push @FORMAT, "AF";
+    push @FORMAT, "FREQ";
 #    print "@FORMAT\n";
     $F[8] = join ":", @FORMAT;
     my $iTIR = first { $FORMAT[$_] eq "TIR" } 0..$#FORMAT;
@@ -50,7 +50,7 @@ while (<>) {
     
     for (9..$#F) {
 	next if ($F[$_] eq "."); ### if genotype field is "." do nothing
-	my $AF = "."; ### if genotype field is ".:.:.:.:.:.:." then add a dot for AF
+	my $FREQ = "."; ### if genotype field is ".:.:.:.:.:.:." then add a dot for FREQ
 	my @GT = split ":", $F[$_];
 	my $DP = $GT[$iDP];
 	if ($DP ne "."){
@@ -62,13 +62,13 @@ while (<>) {
 	    }
 	    
 	    if ($DP == 0){
-		$AF = 0;
+		$FREQ = 0;
 	    } else {
-		$AF = $DP_ALT / $DP;
+		$FREQ = $DP_ALT / $DP;
 	    }
-	    $AF = sprintf("%.3f", $AF);
+	    $FREQ = sprintf("%.3f", $FREQ);
 	}
-	push @GT, $AF;
+	push @GT, $FREQ * 100;
 #	print "$DP_ALT\n";
 	$F[$_] = join ":", @GT;
     }
